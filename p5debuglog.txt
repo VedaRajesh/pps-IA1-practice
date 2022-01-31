@@ -1,0 +1,92 @@
+ run
+sh: 1: run: not found
+exit status 127
+ gcc -g p5original.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x772: file p5original.c, line 9.
+(gdb) r
+Starting program: /home/runner/pps-IA1-practice-2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p5original.c:9
+9    n=input();
+(gdb) s
+input () at p5original.c:16
+16  {
+(gdb) n
+18      printf("enter a number\n");
+(gdb) n
+enter a number
+19      scanf("%f",&n);
+(gdb) n
+9
+20      return n;
+(gdb) n
+21  }
+(gdb) n
+main () at p5original.c:10
+10   sqrt_result=my_sqrt(n);
+(gdb) s
+my_sqrt (n=9) at p5original.c:24
+24   int temp=0,sqrt;
+(gdb) n
+25  sqrt=n/2;
+(gdb) n
+26  while(sqrt!=temp)
+(gdb) n
+28      temp=sqrt;
+(gdb) n
+29      sqrt=(n/temp+temp)/2;
+(gdb) n
+26  while(sqrt!=temp)
+(gdb) n
+28      temp=sqrt;
+(gdb) n
+29      sqrt=(n/temp+temp)/2;
+(gdb) n
+26  while(sqrt!=temp)
+(gdb) n
+31  return sqrt;
+(gdb) n
+32  }
+(gdb) n
+main () at p5original.c:11
+11   output(n,sqrt_result);
+(gdb) s
+output (n=9, sqrt_result=3) at p5original.c:35
+35    printf("squareroot of %f is %f",n,sqrt_result);
+(gdb) p sqrt
+No symbol "sqrt" in current context.
+(gdb) n
+36  }
+(gdb) n
+main () at p5original.c:12
+12   return 0;
+(gdb) p n
+$1 = 9
+(gdb) n
+13  }
+(gdb) n
+__libc_start_main (main=0x5645da60076a <main>, argc=1, argv=0x7fff7b1bdc08, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
+    stack_end=0x7fff7b1bdbf8) at ../csu/libc-start.c:344
+344 ../csu/libc-start.c: No such file or directory.
+(gdb) n
+squareroot of 9.000000 is 3.000000[Inferior 1 (process 1312) exited normally]
+(gdb) 

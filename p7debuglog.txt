@@ -1,5 +1,4 @@
-clang version 7.0.0-3~ubuntu0.18.04.1 (tags/RELEASE_700/final)
-gcc -g p7original.c
+ gcc -g p7original.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -24,11 +23,27 @@ warning: Error disabling address space randomization: Operation not permitted
 
 Breakpoint 1, main () at p7original.c:31
 31      a=input();
+(gdb) s
+input () at p7original.c:8
+8   {
+(gdb) n
+10      printf("enter real part\n");
 (gdb) n
 enter real part
-2
+11      scanf("%d",&k.real);
+(gdb) n
+1
+12      printf("enter imaginary part\n");
+(gdb) n
 enter imaginary part
-3
+13      scanf("%d",&k.imaginary);
+(gdb) n
+2
+14      return k;
+(gdb) n
+15  }
+(gdb) n
+main () at p7original.c:32
 32      b=input();
 (gdb) s
 input () at p7original.c:8
@@ -39,13 +54,13 @@ input () at p7original.c:8
 enter real part
 11      scanf("%d",&k.real);
 (gdb) n
-4
+3
 12      printf("enter imaginary part\n");
 (gdb) n
 enter imaginary part
 13      scanf("%d",&k.imaginary);
 (gdb) n
-5
+4
 14      return k;
 (gdb) n
 15  }
@@ -55,16 +70,14 @@ main () at p7original.c:33
 (gdb) s
 add (a=..., b=...) at p7original.c:19
 19      z.real=a.real+b.real;
-(gdb) p b
-$1 = {real = 4, imaginary = 5}
 (gdb) n
 20      z.imaginary=a.imaginary+b.imaginary;
-(gdb) p a
-$2 = {real = 2, imaginary = 3}
 (gdb) n
 21      return z;
 (gdb) n
 22  }
+(gdb) p z
+$1 = {real = 4, imaginary = 6}
 (gdb) n
 main () at p7original.c:34
 34      output(a,b,result);
@@ -81,10 +94,10 @@ main () at p7original.c:35
 (gdb) n
 36  }
 (gdb) n
-__libc_start_main (main=0x5642b460085b <main>, argc=1, argv=0x7fff751b5568, 
+__libc_start_main (main=0x55733020085b <main>, argc=1, argv=0x7ffe3042d278, 
     init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
-    stack_end=0x7fff751b5558) at ../csu/libc-start.c:344
+    stack_end=0x7ffe3042d268) at ../csu/libc-start.c:344
 344 ../csu/libc-start.c: No such file or directory.
 (gdb) n
-2+3i +4+5i is 6+8i[Inferior 1 (process 1573) exited normally]
+1+2i +3+4i is 4+6i[Inferior 1 (process 493) exited normally]
 (gdb) 

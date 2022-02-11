@@ -1,6 +1,3 @@
- run
-sh: 1: run: not found
-exit status 127
  gcc -g p5original.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
@@ -35,7 +32,7 @@ input () at p5original.c:16
 enter a number
 19      scanf("%f",&n);
 (gdb) n
-9
+25
 20      return n;
 (gdb) n
 21  }
@@ -43,10 +40,16 @@ enter a number
 main () at p5original.c:10
 10   sqrt_result=my_sqrt(n);
 (gdb) s
-my_sqrt (n=9) at p5original.c:24
+my_sqrt (n=25) at p5original.c:24
 24   int temp=0,sqrt;
 (gdb) n
 25  sqrt=n/2;
+(gdb) n
+26  while(sqrt!=temp)
+(gdb) n
+28      temp=sqrt;
+(gdb) n
+29      sqrt=(n/temp+temp)/2;
 (gdb) n
 26  while(sqrt!=temp)
 (gdb) n
@@ -69,24 +72,23 @@ my_sqrt (n=9) at p5original.c:24
 main () at p5original.c:11
 11   output(n,sqrt_result);
 (gdb) s
-output (n=9, sqrt_result=3) at p5original.c:35
+output (n=25, sqrt_result=5) at p5original.c:35
 35    printf("squareroot of %f is %f",n,sqrt_result);
-(gdb) p sqrt
-No symbol "sqrt" in current context.
 (gdb) n
 36  }
+(gdb) p n
+$1 = 25
+(gdb) p sqrt_result
+$2 = 5
 (gdb) n
 main () at p5original.c:12
 12   return 0;
-(gdb) p n
-$1 = 9
 (gdb) n
 13  }
 (gdb) n
-__libc_start_main (main=0x5645da60076a <main>, argc=1, argv=0x7fff7b1bdc08, 
+__libc_start_main (main=0x5652ebe0076a <main>, argc=1, argv=0x7ffe9f8109d8, 
     init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
-    stack_end=0x7fff7b1bdbf8) at ../csu/libc-start.c:344
+    stack_end=0x7ffe9f8109c8) at ../csu/libc-start.c:344
 344 ../csu/libc-start.c: No such file or directory.
 (gdb) n
-squareroot of 9.000000 is 3.000000[Inferior 1 (process 1312) exited normally]
-(gdb) 
+squareroot of 25.000000 is 5.000000[Inferior 1 (process 399) exited normally]

@@ -1,6 +1,3 @@
-run
-sh: 1: run: not found
-exit status 127
  gcc -g p8original.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
@@ -28,21 +25,70 @@ Breakpoint 1, main () at p8original.c:45
 45  {
 (gdb) n
 47     n= get_n();
+(gdb) s
+get_n () at p8original.c:9
+9   {
+(gdb) n
+11      printf("how many complex numbers?\n");
 (gdb) n
 how many complex numbers?
-3
-49     input(n,a);
+12      scanf("%d",&n);
+(gdb) 3
+Undefined command: "3".  Try "help".
 (gdb) n
-enter real part 
-2
+3
+13      return n;
+(gdb) n
+14  }
+(gdb) n
+main () at p8original.c:49
+49     input(n,a);
+(gdb) s
+input (n=3, a=0x7ffdcb11a5f0) at p8original.c:17
+17    for(int i=0;i<n;i++)
+(gdb) n
+19        printf("enter real part");
+(gdb) n
+20        scanf("%f",&a[i].real);
+(gdb) n
+enter real part1
+21        printf("enter imaginary part");
+(gdb) n
+22        scanf("%f",&a[i].imaginary);
+(gdb) n
+enter imaginary part2
+17    for(int i=0;i<n;i++)
+(gdb) n
+19        printf("enter real part");
+(gdb) n
+20        scanf("%f",&a[i].real);
+(gdb) n
+enter real part5
+21        printf("enter imaginary part");
+(gdb) n
+22        scanf("%f",&a[i].imaginary);
+(gdb) n
 enter imaginary part3
-enter real part4
-enter imaginary part5
-enter real part6
-enter imaginary part7
+17    for(int i=0;i<n;i++)
+(gdb) n
+19        printf("enter real part");
+(gdb) n
+20        scanf("%f",&a[i].real);
+(gdb) n
+enter real part7
+21        printf("enter imaginary part");
+(gdb) n
+22        scanf("%f",&a[i].imaginary);
+(gdb) n
+enter imaginary part6
+17    for(int i=0;i<n;i++)
+(gdb) n
+25  }
+(gdb) n
+main () at p8original.c:50
 50     result=add(n,a);
 (gdb) s
-add (n=3, a=0x7ffd11862660) at p8original.c:29
+add (n=3, a=0x7ffdcb11a5f0) at p8original.c:29
 29      m.real=0;m.imaginary=0;
 (gdb) n
 30   for(int i=0;i<n;i++)
@@ -58,11 +104,11 @@ add (n=3, a=0x7ffd11862660) at p8original.c:29
 33       m.imaginary=m.imaginary+a[i].imaginary;
 (gdb) n
 30   for(int i=0;i<n;i++)
-(gdb) nn
-Undefined command: "nn".  Try "help".
+(gdb) m
+Ambiguous command "m": macro, maintenance, make, mem, monitor, mt.
 (gdb) n
 32       m.real=m.real+a[i].real;
-(gdb) 
+(gdb) n
 33       m.imaginary=m.imaginary+a[i].imaginary;
 (gdb) n
 30   for(int i=0;i<n;i++)
@@ -70,11 +116,13 @@ Undefined command: "nn".  Try "help".
 36   return m;
 (gdb) n
 37  }
+(gdb) p m
+$1 = {real = 13, imaginary = 11}
 (gdb) n
 main () at p8original.c:51
 51  output(n,a,result);
 (gdb) s
-output (n=3, a=0x7ffd11862660, result=...) at p8original.c:41
+output (n=3, a=0x7ffdcb11a5f0, result=...) at p8original.c:41
 41      printf("sum is %f+%fi",result.real,result.imaginary);
 (gdb) n
 43  }
@@ -83,9 +131,10 @@ main () at p8original.c:52
 52  return 0;
 (gdb) n
 53  }(gdb) n
-__libc_start_main (main=0x55996c800927 <main>, argc=1, argv=0x7ffd11862a78, 
+__libc_start_main (main=0x55e9f5a00927 <main>, argc=1, argv=0x7ffdcb11aa08, 
     init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
-    stack_end=0x7ffd11862a68) at ../csu/libc-start.c:344
+    stack_end=0x7ffdcb11a9f8) at ../csu/libc-start.c:344
 344 ../csu/libc-start.c: No such file or directory.
 (gdb) n
-sum is 12.000000+15.000000i[Inferior 1 (process 1822) exited normally]
+sum is 13.000000+11.000000i[Inferior 1 (process 530) exited normally]
+(gdb) 

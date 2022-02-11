@@ -1,7 +1,4 @@
- run
-sh: 1: run: not found
-exit status 127
- gcc -g p2original.c
+ gcc -g p2original.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -32,18 +29,38 @@ input () at p2original.c:3
 (gdb) n
 5       scanf("%d",&a);
 (gdb) n
-1
+1 
 6       return a;
 (gdb) n
 7   }
 (gdb) n
 main () at p2original.c:30
 30      b=input();
+(gdb) s
+input () at p2original.c:3
+3   {
+(gdb) n
+5       scanf("%d",&a);
 (gdb) n
 2
+6       return a;
+(gdb) n
+7   }
+(gdb) n
+main () at p2original.c:31
 31      c=input();
+(gdb) s
+input () at p2original.c:3
+3   {
+(gdb) n
+5       scanf("%d",&a);
 (gdb) n
 3
+6       return a;
+(gdb) n
+7   }
+(gdb) n
+main () at p2original.c:32
 32      largest=cmp(a,b,c);
 (gdb) s
 cmp (a=1, b=2, c=3) at p2original.c:10
@@ -66,16 +83,18 @@ output (a=1, b=2, c=3, largest=3) at p2original.c:19
 24      printf("%d is greatest",c);
 (gdb) n
 25  }
+(gdb) m
+Ambiguous command "m": macro, maintenance, make, mem, monitor, mt.
 (gdb) n
 main () at p2original.c:34
 34      return 0;
 (gdb) n
 35  }
 (gdb) n
-__libc_start_main (main=0x56018b00080b <main>, argc=1, argv=0x7ffeb13ef5a8, 
+__libc_start_main (main=0x55a17580080b <main>, argc=1, argv=0x7ffd2b3d1048, 
     init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
-    stack_end=0x7ffeb13ef598) at ../csu/libc-start.c:344
+    stack_end=0x7ffd2b3d1038) at ../csu/libc-start.c:344
 344 ../csu/libc-start.c: No such file or directory.
 (gdb) n
-3 is greatest[Inferior 1 (process 1845) exited normally]
+3 is greatest[Inferior 1 (process 238) exited normally]
 (gdb) 
